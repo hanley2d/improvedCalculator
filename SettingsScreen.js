@@ -25,8 +25,10 @@ const SettingsScreen = ({ navigation }) => {
     return (
         <View style={styles.settingsContainer}>
             <Text style={styles.text}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
-            <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={"#d3e4cd"} onValueChange={(s) => {
+            <Switch 
+                trackColor={{ false: "#767577", true: "#81b0ff" }} 
+                thumbColor={"#d3e4cd"} 
+                onValueChange={(s) => {
                     setDarkMode(s);
                 }} value={darkMode} />
             <Text style={styles.text}>Vibration Mode</Text>

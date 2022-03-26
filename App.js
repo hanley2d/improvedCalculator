@@ -5,10 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from './Calculator';
 import SettingsScreen from './SettingsScreen';
-import { darkTheme } from './themes/dark';
-import { lightTheme } from './themes/light';
+import { darkTheme, lightTheme } from './themes/darkAndLight';
 
 const Stack = createNativeStackNavigator();
+
+export const ThemeContext = React.createContext();
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -32,5 +33,5 @@ const App = () => {
     </View>
   );
 };
-export const ThemeContext = React.createContext();
+
 export default App;
