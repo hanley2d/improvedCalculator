@@ -6,7 +6,6 @@
 import React, { useState } from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
-import Constants from 'expo-constants';
 import { useTheme } from '@react-navigation/native';
 
 /**
@@ -139,7 +138,6 @@ const Calculator = ({ navigation }) => {
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            paddingTop: Constants.statusBarHeight,
             textAlign: 'center',
             backgroundColor: colors.background,
             justifyContent: 'center',
@@ -156,7 +154,8 @@ const Calculator = ({ navigation }) => {
         settingsIcon: {
             flexDirection: 'row',
             justifyContent: 'flex-end',
-            padding: 10,
+            paddingTop: 40,
+            paddingRight: 20,
             backgroundColor: colors.screenView,
         },
         screenView: {
@@ -207,7 +206,7 @@ const Calculator = ({ navigation }) => {
                 style={styles.settingsIcon}
                 onPress={() => navigation.navigate('Settings')}
             >
-                <SimpleLineIcons name="settings" size={25} style={{ color: colors.txtColor, opacity: 0.7 }} />
+                <SimpleLineIcons name="settings" size={25} style={{ color: colors.txtColor, opacity: 0.4 }} />
             </Pressable>
             {/* Screen View */}
             <View style={styles.screenView}>

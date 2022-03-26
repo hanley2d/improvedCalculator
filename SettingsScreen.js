@@ -4,18 +4,10 @@ import { View, Text, Switch, StyleSheet } from 'react-native';
 import { ThemeContext } from './App';
 
 const SettingsScreen = ({ navigation }) => {
-    
+
     const { colors } = useTheme();
-    const {setDarkMode, darkMode} = React.useContext(ThemeContext);
-    
-    // const toggleDarkMode = (value) => {
-    //     setDarkMode(value);
-    // }     
-    // const checkDarkMode = (darkMode) => {
-    //     if (!darkMode) {
-           
-    //     }         
-    // };   
+    const { darkMode, setDarkMode } = React.useContext(ThemeContext);
+
     const styles = StyleSheet.create({
         settingsContainer: {
             flex: 1,
@@ -24,17 +16,20 @@ const SettingsScreen = ({ navigation }) => {
             alignItems: 'center',
             backgroundColor: colors.background,
             color: colors.txtColor,
-          }
+        },
+        text: {
+            fontSize: 25,
+            color: colors.txtColor,
+        },
     });
     return (
         <View style={styles.settingsContainer}>
-            <Text style={{ color: colors.txtColor }}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
-            <Switch onValueChange={(s) => {
-                // checkDarkMode(s);
-                //toggleDarkMode(s);
-                setDarkMode(s);
-            }}value={darkMode} />
-            <Text style={{ color: colors.txtColor }}>Vibration Mode</Text>
+            <Text style={styles.text}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
+            <Switch trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={"#d3e4cd"} onValueChange={(s) => {
+                    setDarkMode(s);
+                }} value={darkMode} />
+            <Text style={styles.text}>Vibration Mode</Text>
             <Switch />
         </View>
     )
