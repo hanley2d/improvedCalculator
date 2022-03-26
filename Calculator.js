@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import { FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
-import { Colors } from './colors';
+import { useTheme } from '@react-navigation/native';
 
 /**
  * Name: Calculator
@@ -21,7 +21,7 @@ import { Colors } from './colors';
  * </View>
  * side-effects: Calculator magic.
  */
-const Calculator = ({navigation}) => {
+const Calculator = ({ navigation }) => {
     // array for buttonValues which can be used with array.map() function to assign components and styles. 
     // order matters.
     const buttonValues = [
@@ -134,16 +134,83 @@ const Calculator = ({navigation}) => {
         }
         return;
     };
+
+    const { colors } = useTheme();
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            paddingTop: Constants.statusBarHeight,
+            textAlign: 'center',
+            backgroundColor: colors.background,
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            borderColor: 'black',
+            borderWidth: 2,
+        },
+        text: {
+            color: colors.txtColor,
+            fontWeight: 'bold',
+            fontSize: 35,
+            textAlign: 'center',
+        },
+        settingsIcon: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            padding: 10,
+            backgroundColor: colors.screenView,
+        },
+        screenView: {
+            flex: 2,
+            backgroundColor: colors.screenView,
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+            padding: 20,
+        },
+        buttonsView: {
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            flex: 4,
+            margin: 5,
+            paddingBottom: 20,
+        },
+        button: {
+            backgroundColor: colors.screenView,
+            borderColor: '#3DA5',
+            borderWidth: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: '20%',
+            minHeight: '20%',
+            borderRadius: 100,
+            margin: 2,
+            flex: 1,
+        },
+        cButton: {
+            backgroundColor: colors.screenView,
+            borderColor: '#3DA5',
+            borderWidth: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: '69%',
+            minHeight: '20%',
+            borderRadius: 50,
+            margin: 2,
+            flex: 1,
+        },
+    });
+
     return (
         <View style={styles.container}>
             <Pressable
                 style={styles.settingsIcon}
                 onPress={() => navigation.navigate('Settings')}
             >
-                <SimpleLineIcons name="settings" size={25} style={{ color: "#fff", opacity: 0.7 }} />
+                <SimpleLineIcons name="settings" size={25} style={{ color: colors.txtColor, opacity: 0.7 }} />
             </Pressable>
             {/* Screen View */}
-            <View style={styles.screenView}>                
+            <View style={styles.screenView}>
                 <Text style={styles.text}>{display}</Text>
             </View>
 
@@ -161,7 +228,7 @@ const Calculator = ({navigation}) => {
                             key={button}
                             style={styles.button}
                             onPress={() => userInput({ button })}>
-                            <FontAwesome5 name="step-backward" size={25} color="white" />
+                            <FontAwesome5 name="step-backward" size={25} color={colors.txtColor} />
                         </Pressable>
                     ) : button === 'C' ? (
                         <Pressable
@@ -183,70 +250,4 @@ const Calculator = ({navigation}) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: Constants.statusBarHeight,
-      textAlign: 'center',
-      backgroundColor: Colors.BG,
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      borderColor: 'black',
-      borderWidth: 2,
-    },
-    text: {
-      color: Colors.textColor,
-      fontWeight: 'bold',
-      fontSize: 35,
-      textAlign: 'center',
-    },
-    settingsIcon: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      padding: 10,
-      backgroundColor: Colors.screenView,
-    },
-    screenView: {
-      flex: 2,
-      backgroundColor: Colors.screenView,
-      justifyContent: 'flex-end',
-      alignItems: 'flex-end',
-      padding: 20,
-    },
-    buttonsView: {
-      flexDirection: 'row',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      flex: 4,
-      margin: 5,
-      paddingBottom: 20,
-    },
-    button: {
-      backgroundColor: Colors.screenView,
-      borderColor: '#3DA5',
-      borderWidth: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      minWidth: '20%',
-      minHeight: '20%',
-      borderRadius: 100,
-      margin: 2,
-      flex: 1,
-    },
-    cButton: {
-      backgroundColor: Colors.screenView,
-      borderColor: '#3DA5',
-      borderWidth: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      minWidth: '69%',
-      minHeight: '20%',
-      borderRadius: 50,
-      margin: 2,
-      flex: 1,
-    },    
-  });
-
 export default Calculator;
