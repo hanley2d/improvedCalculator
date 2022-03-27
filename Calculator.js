@@ -1,12 +1,13 @@
 /**
  * file: App.js
  * author: David Hanley
- * last-modified: 2022-02-15
+ * last-modified: 2022-03-26
  */
-import React, { useState } from 'react';
-import { Text, View, Pressable, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Text, View, Pressable, StyleSheet, Vibration } from 'react-native';
 import { FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
+import { VibrationContext } from './Context';
 
 /**
  * Name: Calculator
@@ -34,6 +35,8 @@ const Calculator = ({ navigation }) => {
     const [display, setDisplay] = useState('');
     // currNumber can be used to check if there has already been a decimal entered.
     const [currNumber, setCurrNumber] = useState('');
+
+    const {vibration, setVibration} = useContext(VibrationContext);
 
     /**
      * Name: evaluateExpr   
@@ -226,21 +229,27 @@ const Calculator = ({ navigation }) => {
                         <Pressable
                             key={button}
                             style={styles.button}
-                            onPress={() => userInput({ button })}>
+                            onPress={() => {
+                                userInput({ button })
+                                vibration ? Vibration.vibrate(40) : null;}}>
                             <FontAwesome5 name="step-backward" size={25} color={colors.txtColor} />
                         </Pressable>
                     ) : button === 'C' ? (
                         <Pressable
                             key={button}
                             style={styles.cButton}
-                            onPress={() => userInput({ button })}>
+                            onPress={() => {
+                                userInput({ button }); 
+                                vibration ? Vibration.vibrate(40) : null; }}>
                             <Text style={styles.text}>{button}</Text>
                         </Pressable>
                     ) : (
                         <Pressable
                             key={button}
                             style={styles.button}
-                            onPress={() => userInput({ button })}>
+                            onPress={() => {
+                                userInput({ button });
+                                vibration ? Vibration.vibrate(40) : null;}}>
                             <Text style={styles.text}>{button}</Text>
                         </Pressable>
                     )
