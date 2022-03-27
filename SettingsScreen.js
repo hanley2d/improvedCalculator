@@ -35,14 +35,14 @@ const SettingsScreen = ({ navigation }) => {
             <Text style={styles.text}>{darkMode ? "Dark Mode" : "Light Mode"}</Text>
             <Switch 
                 trackColor={{ false: "#767577", true: "#81b0ff" }} 
-                thumbColor={"#d3e4cd"} 
+                thumbColor={darkMode ? "#B5CDA3" : "#FF8080" } 
                 onValueChange={(s) => {
                     toggleTheme(s);
                 }} value={darkMode} />
             <Text style={styles.text}>{vibration? 'Vibration Mode On' : 'Vibration Mode Off'}</Text>
             <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }} 
-                thumbColor={"#d3e4cd"} 
+                thumbColor={vibration ? "#B5CDA3" : "#FF8080"} 
                 onValueChange={(s) => {
                     toggleVibration(s);
                 }} value={vibration} />

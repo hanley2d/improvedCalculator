@@ -15,6 +15,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [vibration, setVibration] = useState(false);
+  
   return (
     <View style={{flex:1, backgroundColor: darkMode? '#09011B' : '#FEF5ED'}}>
       <ThemeContext.Provider value={{darkMode, setDarkMode}} >
