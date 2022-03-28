@@ -1,4 +1,8 @@
 /**
+ * File: Context.js
+ * Author: David Hanley
+ * Last Modified: 2022-03-27
+ * 
  * This file contains the contexts for the theme and vibration values. 
  * This way the useState hooks can be passed between components while maintaining the state.
  * ThemeContext and VibrationContext must be placed in the App.js file with the value of their respective hooks.

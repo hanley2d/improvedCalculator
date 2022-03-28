@@ -1,11 +1,18 @@
+/**
+ * File: SettingsScreen.js
+ * Author: David Hanley
+ * Last Modified
+ */
 import { useTheme } from '@react-navigation/native';
 import React, { useContext } from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
 import { ThemeContext, VibrationContext } from './Context';
 
 const SettingsScreen = ({ navigation }) => {
-
+    // import colours for the current theme which is determined in the NavigationContainer in App.js
     const { colors } = useTheme();
+    // these values are imported from Context.js. 
+    // This can be done because they were passed into the context providers in App.js
     const { darkMode, setDarkMode } = useContext(ThemeContext);
     const { vibration, setVibration } = useContext(VibrationContext);
 
