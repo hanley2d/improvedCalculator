@@ -36,7 +36,7 @@ const Calculator = ({ navigation }) => {
     // currNumber can be used to check if there has already been a decimal entered.
     const [currNumber, setCurrNumber] = useState('');
 
-    const {vibration, setVibration} = useContext(VibrationContext);
+    const { vibration, setVibration } = useContext(VibrationContext);
 
     /**
      * Name: evaluateExpr   
@@ -136,7 +136,11 @@ const Calculator = ({ navigation }) => {
         }
         return;
     };
-
+    /**
+     * Colors are imported from the themes defined in darkAndLight.js.
+     * useTheme is a hook from React Navigation.
+     * The chosen colour scheme depends on the value of the darkMode hook which is set in the NavigationContainer in App.js     * 
+     */
     const { colors } = useTheme();
     const styles = StyleSheet.create({
         container: {
@@ -145,8 +149,6 @@ const Calculator = ({ navigation }) => {
             backgroundColor: colors.background,
             justifyContent: 'center',
             flexWrap: 'wrap',
-            borderColor: 'black',
-            borderWidth: 2,
         },
         text: {
             color: colors.txtColor,
@@ -207,9 +209,11 @@ const Calculator = ({ navigation }) => {
         <View style={styles.container}>
             <Pressable
                 style={styles.settingsIcon}
-                onPress={() => navigation.navigate('Settings')}
-            >
-                <SimpleLineIcons name="settings" size={25} style={{ color: colors.txtColor, opacity: 0.4 }} />
+                onPress={() => {
+                    navigation.navigate('Settings');
+                    vibration ? Vibration.vibrate(30) : null;
+                }}>
+                <SimpleLineIcons name="settings" size={25} style={{ color: colors.txtColor, opacity: 0.9 }} />
             </Pressable>
             {/* Screen View */}
             <View style={styles.screenView}>
@@ -231,7 +235,8 @@ const Calculator = ({ navigation }) => {
                             style={styles.button}
                             onPress={() => {
                                 userInput({ button })
-                                vibration ? Vibration.vibrate(40) : null;}}>
+                                vibration ? Vibration.vibrate(30) : null;
+                            }}>
                             <FontAwesome5 name="step-backward" size={25} color={colors.txtColor} />
                         </Pressable>
                     ) : button === 'C' ? (
@@ -239,8 +244,9 @@ const Calculator = ({ navigation }) => {
                             key={button}
                             style={styles.cButton}
                             onPress={() => {
-                                userInput({ button }); 
-                                vibration ? Vibration.vibrate(40) : null; }}>
+                                userInput({ button });
+                                vibration ? Vibration.vibrate(30) : null;
+                            }}>
                             <Text style={styles.text}>{button}</Text>
                         </Pressable>
                     ) : (
@@ -249,7 +255,8 @@ const Calculator = ({ navigation }) => {
                             style={styles.button}
                             onPress={() => {
                                 userInput({ button });
-                                vibration ? Vibration.vibrate(40) : null;}}>
+                                vibration ? Vibration.vibrate(30) : null;
+                            }}>
                             <Text style={styles.text}>{button}</Text>
                         </Pressable>
                     )

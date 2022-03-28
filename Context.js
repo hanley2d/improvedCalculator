@@ -5,7 +5,7 @@
  * This way the children components can inherit the state.
  */
 
-import { createContext} from 'react';
+import { createContext } from 'react';
 
 export const ThemeContext = createContext();
 
